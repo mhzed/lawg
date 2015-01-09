@@ -33,5 +33,3 @@ module.exports = (paras...)->
       console.log "[#{ts}](#{e.stack}) #{msg} "
   else
     console.log "[#{ts}] #{msg} "
-
-module.exports( 1, " word ", new Error("err"), [1,2], { x : 1, y: {a : 2}})

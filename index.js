@@ -57,13 +57,6 @@
     }
   };
 
-  module.exports(1, " word ", new Error("err"), [1, 2], {
-    x: 1,
-    y: {
-      a: 2
-    }
-  });
-
 }).call(this);
 
 //# sourceMappingURL=index.js.map
