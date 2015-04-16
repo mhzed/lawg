@@ -7,12 +7,6 @@ if typeof process == 'undefined'
 else
   debug = if process.env['NODE_DEBUG'] then true else false
 
-inspect = (obj, opt)->
-  if typeof window == 'undefined'
-    util  = require 'util'
-    util.inspect obj, opt
-  else
-    obj.toString()
 
 module.exports = (paras...)->
 
@@ -23,6 +17,15 @@ module.exports = (paras...)->
     pad = (3-sms.length)
     (sms = '0' + sms) for i in [0...pad]
     sts.slice(4, 24) + "." + sms + sts.slice(24, 33)
+  inspect = (obj, opt)->
+    if typeof window == 'undefined'
+      util  = require 'util'
+      util.inspect obj, opt
+    else if module.exports.inspect
+      module.exports.inspect obj, opt
+    else
+      '' + obj
+
 
   msg = ((if typeof para == "object" then inspect(para, {depth: 10}) else "#{para}") \
     for para in paras).join('')

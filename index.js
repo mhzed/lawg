@@ -5,7 +5,7 @@ paras: what to log, if an object then it will be deeply inspected
  */
 
 (function() {
-  var debug, inspect,
+  var debug,
     __slice = [].slice;
 
   if (typeof process === 'undefined') {
@@ -14,18 +14,8 @@ paras: what to log, if an object then it will be deeply inspected
     debug = process.env['NODE_DEBUG'] ? true : false;
   }
 
-  inspect = function(obj, opt) {
-    var util;
-    if (typeof window === 'undefined') {
-      util = require('util');
-      return util.inspect(obj, opt);
-    } else {
-      return obj.toString();
-    }
-  };
-
   module.exports = function() {
-    var e, file, locLine, m, msg, offsets, para, paras, path, ts, _ref;
+    var e, file, inspect, locLine, m, msg, offsets, para, paras, path, ts, _ref;
     paras = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
     ts = (function() {
       var dateTs, i, pad, sms, sts, _i;
@@ -38,6 +28,17 @@ paras: what to log, if an object then it will be deeply inspected
       }
       return sts.slice(4, 24) + "." + sms + sts.slice(24, 33);
     })();
+    inspect = function(obj, opt) {
+      var util;
+      if (typeof window === 'undefined') {
+        util = require('util');
+        return util.inspect(obj, opt);
+      } else if (module.exports.inspect) {
+        return module.exports.inspect(obj, opt);
+      } else {
+        return '' + obj;
+      }
+    };
     msg = ((function() {
       var _i, _len, _results;
       _results = [];
