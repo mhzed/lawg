@@ -24,7 +24,7 @@ module.exports = (paras...)->
     else if module.exports.inspect
       module.exports.inspect obj, opt
     else
-      '' + obj
+      JSON.stringify(obj)
 
 
   msg = ((if typeof para == "object" then inspect(para, {depth: 10}) else "#{para}") \
@@ -37,8 +37,7 @@ module.exports = (paras...)->
     if not m then m = /at (.*?):(\d+:\d+)/.exec(locLine)
     if m
       [file, offsets] = [m[1], m[2]]
-      path  = require "path"
-      console.log "[#{ts}](#{path.relative(process.cwd(), file)}:#{offsets}) #{msg} "
+      console.log "[#{ts}](#{file}:#{offsets}) #{msg} "
     else
 
       console.log "[#{ts}](#{e.stack}) #{msg} "
