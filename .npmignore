@@ -1,5 +1,3 @@
-*.map
-*.coffee
 test/
 node_modules/
 bower_components/
