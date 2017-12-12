@@ -25,7 +25,7 @@ export default function (...paras) {
       return JSON.stringify(obj);
   };
 
-  let msg = Array.from(paras).map(para => typeof para === "object" ? inspect(para) : `${ para }`).join('');
+  let msg = paras.map(para => typeof para === "object" ? inspect(para) : `${ para }`).join('');
 
   if (debug) {
     let e = new Error("");
@@ -35,7 +35,7 @@ export default function (...paras) {
       m = /at (.*?):(\d+:\d+)/.exec(locLine);
     }
     if (m) {
-      let [file, offsets] = Array.from([m[1], m[2]]);
+      let [file, offsets] = [m[1], m[2]];
       return console.log(`[${ ts }](${ file }:${ offsets }) ${ msg } `);
     } else {
 
