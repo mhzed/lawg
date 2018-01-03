@@ -5,8 +5,7 @@
     "moduleResolution": "node",
     "module": "commonjs",
     "typeRoots": ["node_modules/@types"],
-    "sourceMap" : true,
-    "jsx": "react"
+    "sourceMap" : true
     }
   }
   
